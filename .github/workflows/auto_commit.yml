@@ -26,7 +26,7 @@ jobs:
       - name: Generate commit message
         id: commit-message
         run: |
-          echo "message=Auto commit on $(date +'%Y-%m-%d %H:%M:%S') $(shuf -n 1 -e 🌌🚀🌠💫🪐🌟⭐️)" >> $GITHUB_ENV
+          echo "message=Auto commit on $(date +'%Y-%m-%d %H:%M:%S') $(shuf -n 1 -e 🌌🚀🌠💫🪐🌟⭐️)"
 
       - name: GitHub Push
         uses: ad-m/github-push-action@v0.6.0
