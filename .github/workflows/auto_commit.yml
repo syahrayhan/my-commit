@@ -13,20 +13,20 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Set up Git
         run: |
-          git config --global user.name "syahrayhan"
-          git config --global user.email "syahrayhanid@gmail.com"
+          git config --global user.name "Your Name"
+          git config --global user.email "your-email@example.com"
 
       - name: Generate commit message
         id: commit-message
         run: |
-          echo "::set-output name=message::Auto commit on $(date +'%Y-%m-%d %H:%M:%S') $(shuf -n 1 -e 🌌🚀🌠💫🪐🌟⭐️)"
+          echo "message=Auto commit on $(date +'%Y-%m-%d %H:%M:%S') $(shuf -n 1 -e 🌌🚀🌠💫🪐🌟⭐️)" >> $GITHUB_ENV
 
       - name: Commit and push changes
         run: |
           git add .
-          git commit -m "${{ steps.commit-message.outputs.message }}"
+          git commit -m "${{ env.message }}"
           git push
