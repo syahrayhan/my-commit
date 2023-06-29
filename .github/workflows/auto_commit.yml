@@ -1,0 +1,32 @@
+name: Auto Commit
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: "0 7,9,12,14 * * *"
+
+jobs:
+  commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "syahrayhan"
+          git config --global user.email "syahrayhanid@gmail.com"
+
+      - name: Generate commit message
+        id: commit-message
+        run: |
+          echo "::set-output name=message::Auto commit on $(date +'%Y-%m-%d %H:%M:%S') $(shuf -n 1 -e 🌌🚀🌠💫🪐🌟⭐️)"
+
+      - name: Commit and push changes
+        run: |
+          git add .
+          git commit -m "${{ steps.commit-message.outputs.message }}"
+          git push
